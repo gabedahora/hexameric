@@ -1,4 +1,4 @@
-# hexameric
+# hexameric array builder
 Script to build the pMMO hexameric array 
 
 python hexarray.py
