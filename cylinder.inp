@@ -1,0 +1,78 @@
+tolerance 3.0
+nloop0 1000
+output unique_cylindrical_bilayer_adjusted.pdb
+filetype pdb
+
+##########################################################################
+# Global Cylinder:
+# Force ALL molecules to lie within a cylinder starting at (0,0,0)
+# extending along z with a length of 54 Å and a lateral radius of 25 Å.
+##########################################################################
+
+##########################################################################
+# UPPER LEAFLET (Top Half)
+#   - POPE and CDL2 in the UL configuration.
+##########################################################################
+
+structure POPE.pdb
+  number 3
+  inside cylinder 0.0 0.0 0.0   0.0 0.0 1.0   25 54
+  # Hydrophilic head (N, atom 1) forced: 50 ≤ z ≤ 54.
+  atoms 1
+    above plane 0 0 1 50.0
+    below plane 0 0 1 54.0
+  end atoms
+  # Tail terminal (C316, atom 122) forced: 24 ≤ z ≤ 28.
+  atoms 122
+    above plane 0 0 1 24.0
+    below plane 0 0 1 28.0
+  end atoms
+end structure
+
+structure CDL2.pdb
+  number 3
+  inside cylinder 0.0 0.0 0.0   0.0 0.0 1.0   25 54
+  # Hydrophilic head (P3, atom 4) for UL: 50 ≤ z ≤ 54.
+  atoms 4
+    above plane 0 0 1 50.0
+    below plane 0 0 1 54.0
+  end atoms
+  # Tail terminal (CB18, atom 151) for UL: 24 ≤ z ≤ 28.
+  atoms 151
+    above plane 0 0 1 24.0
+    below plane 0 0 1 28.0
+  end atoms
+end structure
+
+##########################################################################
+# LOWER LEAFLET (Bottom Half)
+#   - DPPE and CDL2 in the LL configuration.
+##########################################################################
+
+structure DPPE.pdb
+  number 3
+  inside cylinder 0.0 0.0 0.0   0.0 0.0 1.0   25 54
+  # Hydrophilic head (N, atom 1) forced to be very low: z ≤ 2.
+  atoms 1
+    below plane 0 0 1 2.0
+  end atoms
+  # Tail terminal (C215, atom 72) forced: 24 ≤ z ≤ 28.
+  atoms 72
+    above plane 0 0 1 24.0
+    below plane 0 0 1 28.0
+  end atoms
+end structure
+
+structure CDL2.pdb
+  number 3
+  inside cylinder 0.0 0.0 0.0   0.0 0.0 1.0   25 54
+  # Hydrophilic head (P3, atom 4) for LL forced to be very low: z ≤ 2.
+  atoms 4
+    below plane 0 0 1 2.0
+  end atoms
+  # Tail terminal (CB18, atom 151) for LL forced: 24 ≤ z ≤ 28.
+  atoms 151
+    above plane 0 0 1 24.0
+    below plane 0 0 1 28.0
+  end atoms
+end structure
